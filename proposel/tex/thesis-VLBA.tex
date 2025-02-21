@@ -1,0 +1,502 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Template of the department Very Large Business Applications (VLBA), CvO University Oldenburg. 
+%% It suppose to be used for bachelor and master theses, scientific papers, etc..
+%%
+%% Versions, dates and authors:
+%%		File "versions.txt"
+%%
+%% Note: 
+%%		Has only been tested with pdflatex, not latex (dvi). 
+%%		Still, there is theoretical support also for latex.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{scrartcl}
+%\documentclass[11pt]{scrbook}
+
+%----------------------------------------------------------------------------------------
+% LATEX PACKAGES
+%----------------------------------------------------------------------------------------
+
+% encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% German language
+% \usepackage{ngerman}            
+\usepackage[german]{babel}
+
+% \usepackage{hyphenat}
+% \hyphenation{Mathe-matik wieder-gewinnen}
+
+% latex page styles
+% \usepackage{fancyhdr}
+\usepackage[automark,headsepline]{scrlayer-scrpage}
+
+% various packages
+\usepackage{geometry}
+\usepackage{ifpdf}
+
+% line spread
+\usepackage{setspace}
+
+% citation style APA
+\usepackage[natbibapa]{apacite}   
+
+% acronyms 
+\usepackage[acronym]{glossaries}
+
+% glossaries
+% \usepackage{glossaries}
+
+% add source code
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+%----------------------------------------------------------------------------------------
+% PDFLATEX
+%----------------------------------------------------------------------------------------
+\ifpdf
+  % One of these two:
+  \usepackage[pdftex]{graphicx}
+  %\usepackage[pdftex]{epsfig}
+  %\usepackage[pdftex]{hyperref}
+  \usepackage[pdftex,
+			  colorlinks=true,
+			  linkcolor=black,
+			  citecolor=black]{hyperref}
+% For latex (dvi)
+\else
+  % One of these two:
+  \usepackage[dvips]{graphicx}
+  %\usepackage[dvips]{epsfig}
+  % make the command \href from hyperref available as a 'print only'
+  \newcommand{\href}[2]{#2}
+\fi
+
+%----------------------------------------------------------------------------------------
+% Picture options
+%----------------------------------------------------------------------------------------
+\graphicspath{{images/}}         	% Default path to pictures used
+\DeclareGraphicsExtensions{.png}   	% More extensions can be added
+
+%----------------------------------------------------------------------------------------
+% Import own latex improvements as preamble
+%----------------------------------------------------------------------------------------
+\input{own-styles-and-commands.tex}
+
+% Page settings for a bachelor/master
+\geometry{a4paper, left=3cm, right=3cm}
+
+% Page settings for a PhD-thesis
+%\geometry{a4paper,left=3cm,right=2.5cm}   
+
+% Managing acronyms that are done with package
+\makeglossaries
+\input{acronyms/acronyms.tex}
+ 
+
+%----------------------------------------------------------------------------------------
+% DOCUMENT START
+%----------------------------------------------------------------------------------------
+\begin{document}
+	
+%----------------------------------------------------------------------------------------
+% Remove numbering 
+%----------------------------------------------------------------------------------------
+\pagenumbering{gobble} 		
+
+%----------------------------------------------------------------------------------------
+% TITLE PAGE
+%----------------------------------------------------------------------------------------
+\begin{titlepage}
+	\begin{centering}
+				
+		\begin{figure}[h!]
+			\centering
+			% Ggf. Copyright beachten - ansonsten nur für Gebrauch an der CvO
+			\includegraphics[scale=0.7]{UOL-Logo-blue.png}    
+		 \end{figure}
+
+		\vspace*{-0.2cm}
+
+		\begin{figure}[h!]
+		    \centering
+		    % Ggf. Copyright beachten - ansonsten nur für Gebrauch an der CvO/VLBA
+		    \includegraphics[width=250pt]{VLBA-Logo}    
+		\end{figure}
+
+		\vspace*{0.4cm}
+  
+		\textsf{\Huge \textbf{Using \LaTeX\ for scientific papers at the VLBA, Oldenburg\\}}
+
+		\vspace*{0.5cm}
+		\noindent Bachelorarbeit / Masterarbeit
+		% \noindent Master’s Thesis
+		% \noindent Bachelor’s Thesis
+		% \noindent Masterarbeit
+		% \noindent Referat  
+		% \emph{Bei Referaten noch mit Zusatz:} im Rahmen des..     % Insert correct type
+
+	\end{centering}
+  
+    \vspace*{1.5cm}
+    
+    \begin{tabbing}
+		xxxxxxxxxxxxxxxx\= \kill
+	  
+		%----------------------------------------------------------------------------------------
+		% CHANGE ACCORDINGLY
+		%----------------------------------------------------------------------------------------
+		
+		%
+		% German version
+		%
+		
+		\small Themensteller:\> Prof. Dr.-Ing. Jorge Marx Gómez\\
+		\small Betreuer:\> Titel Vorname Name\\ 
+		\small \> Titel Vorname Name (Firma)\\\\
+	
+		\small Vorgelegt von: \>Name\\
+		\small \>Semesteranschrift\\
+		\small \>PLZ Wohnort:\\
+		\small \>mustermann@uni-oldenburg.de\\\\
+	
+		\small Abgabetermin:\> 99. Januar 9999
+		
+		%
+		% English version
+		%
+		
+		% \small Supervisor:\> Prof. Dr.-Ing. Jorge Marx Gómez\\
+		% \small Advisor:\> Titel Surname Name\\
+		% \small \> Titel Surname Name (Company)\\\\
+
+		% \small Submitted by: \>Surname Name \\
+		% \small \>Address\\
+		% \small \>Postal Code:\\
+		% \small \>mustermann@uni-oldenburg.de\\\\
+
+		% \small Submission date:\> 99. Januar 9999
+
+	\end{tabbing}
+\end{titlepage}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% Clear styles, and setting page numbers 
+%----------------------------------------------------------------------------------------
+\clearpairofpagestyles
+\rohead{\pagemark}
+\rehead{\pagemark}
+
+%----------------------------------------------------------------------------------------
+% Generate table of content
+%----------------------------------------------------------------------------------------
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+% Configuring depth of the table of content
+%----------------------------------------------------------------------------------------
+\setcounter{tocdepth}{2}
+
+%----------------------------------------------------------------------------------------
+% Starting "roman" style numbering
+%----------------------------------------------------------------------------------------
+\pagenumbering{Roman}
+\setcounter{page}{1}
+
+%----------------------------------------------------------------------------------------
+% Section for special symbols (math, physics, etc.)
+%----------------------------------------------------------------------------------------
+
+% \section*{Symbolverzeichnis}
+% \addcontentsline{toc}{section}{Symbolverzeichnis}
+% \newpage
+
+%----------------------------------------------------------------------------------------
+% Section for the acronyms:
+%		- A glossary package is used
+%		- Could be switched to manual mode (see file `acronyms/acronyms-manual.tex`)
+%----------------------------------------------------------------------------------------
+
+% 
+% Add acronyms manually (no packages)
+% 
+% \addcontentsline{toc}{section}{Akronyme}
+% \include{acronyms/acronyms-manual.tex}
+% \newpage
+
+% 
+% Add acronyms automatically
+% 
+\addcontentsline{toc}{section}{Acronyms}
+\printglossary[type=\acronymtype]
+\newpage
+
+
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+% section name in english
+% \addcontentsline{toc}{section}{List of Figures}
+\listoffigures
+\newpage
+
+\addcontentsline{toc}{section}{Tabellenverzeichnis}
+% section name in english
+%\addcontentsline{toc}{section}{List of Tables}
+\listoftables
+\newpage
+
+%% Line spread
+\onehalfspacing
+
+% Start numbering again from 1
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% --------------------------------
+% CONFIGURE HEADER/FOOTER STYLES
+% --------------------------------
+\clearpairofpagestyles
+%\pagestyle{scrheadings}
+
+% top left on odd pages
+\lohead{\rightmark}
+
+% bottom right
+%\rofoot{\pagemark}
+%\refoot{\pagemark}
+
+% top right
+\rehead{\pagemark}
+\rohead{\pagemark}
+
+%----------------------------------------------------------------------------------------
+%
+% NOTES: 
+% 	- For large documents, instead of typing all the text in one file, it would be better
+% 	  to split the content into multiple files and use command like \include or \includeonly or \input 
+%     to include text
+% 	- For English variants of text, check commented lines near respected TEX commands
+% 
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+% CONTENT STARTS
+%----------------------------------------------------------------------------------------
+\section{Einleitung}
+In diesem Abschnitt der Arbeit wird das Ziel formuliert, in einen größeren Zusammenhang eingeordnet und gegen andere Themen abgegrenzt. Die wichtigsten Begriffe des Themas müssen in der Einleitung präzise definiert werden; eine sorgfältige Formulierung ist hier besonders wichtig. Weiterhin können Hinweise zur verwendeten Untersuchungsmethodik gegeben werden. Durch die Darstellung des Gangs der Untersuchung kann auch die Zweckmäßigkeit der gewählten Gliederung hervorgehoben werden.  Nach Möglichkeit sollte dieses Kapitel nicht ‚Einleitung‘ heißen, sondern einen sinnvollen Titel mit Bezug zur Arbeit tragen.
+
+Das einleitende Kapitel sollte also eine Hinführung zum Thema, das Ziel der Arbeit und den Aufbau der Arbeit enthalten. Diese Ausführungen basieren auf der vom jeweiligen Studenten anzufertigenden Disposition / Proposal / Exposé.
+
+Die Erfahrung zeigt, dass ein Teil der Einleitung erst zum Schluss der Arbeit ausformuliert  werden sollte. So werden wiederholte Änderungen am Text vermieden.
+
+Hier ist ein Beispiel, das paar Akronyme verwendet \acrshort{acid}, \acrshort{gcd}
+
+Zum prinzipiellen Ablauf eines Bachelor/Master-arbeitsvorhabens:
+
+\begin{itemize}
+  \item Der Student setzt sich mit dem Betreuer in Verbindung.
+  \item Nach maximal zwei Vorgesprächen erstellt der Student eine Disposition / Proposal / Exposé und reicht diese bei seinem Betreuer ein. Die Disposition sollte ungefähr zwei Seiten Umfang haben, das Thema erläutern, das Ziel der Arbeit beschreiben und den geplanten Aufbau darlegen.
+  \item Zur eigenen Hilfestellung hat der Student einen Terminplan anzugeben. Dieser enthält neben angestrebten Abgabetermin entsprechende Meilensteine (z. B. Literaturrecherche beendet; Funktionsmodellierung beendet; Prototyp fertig etc.). Die jeweiligen Meilensteine unterscheiden sich naturgemäß von Arbeit zu Arbeit. Der Terminplan kann dem Studenten zur Kontrolle dienen, inwieweit seine Abschätzungen bezüglich der Dauer bestimmter Tätigkeiten mit dem Ist übereinstimmen und daraus u. U. Korrekturen in der weiteren Vorgehensweise vornehmen (natürlich immer in Absprache mit dem Betreuer).
+  \item Wird die Expose angenommen, kann die Masterarbeit angemeldet werden.
+  \item Die Bearbeitungsdauer für Bachelor/Master-arbeit  richtet sich nach der zugrunde zu legenden Prüfungsordnung.
+  \item Der maximalen Seitenumfänge des reinen Textes (ohne Verzeichnisse und Anhang) betragen:
+  \begin{itemize}
+    \item bei Masterarbeit 100 Seiten,
+    \item bei Individuellen Projekten/Bachelorarbeit 80 Seiten.
+    \item Von Masterarbeiten und Individuellen Projekten/Bachelorarbeiten ist jeweils ein digitales Exemplar beim Aufgabensteller abzugeben. Für die Abgabe gedruckter Exemplare gilt die Abgabe von 3 Exemplaren an das Prüfungsamt
+  \end{itemize}
+  \item Sowohl Masterarbeiten als auch Individuelle Projekte/Bachelorarbeiten sind im Rahmen eines Kolloquiums zu verteidigen.
+\end{itemize}
+  
+\section{Erster Abschnitt des Hauptteils}
+\subsection{Allgemeine Hinweise zur Formatierung}
+Das Mischen von altern und neuer Rechtschreibung ist unzulässig. 
+
+Für die Erstellung der eigenen Arbeit kann es sinnvoll sein, dieses Dokument zu übernehmen  und kontinuierlich die beispielhaften Bereiche gegen die eigenen neuen Passagen zu ersetzen; so bleibt der Aufbau erhalten und man verliert nicht versehentlich Formatierungen o. ä. Bei der Erstellung der Gliederung der eigenen wissenschaftlichen Arbeit sollten die beiden Kriterien Vollständigkeit und Überschneidungsfreiheit beachtet werden! Auf jeder eröffneten Gliederungsebene müssen jeweils mindestens zwei Gliederungspunkte existieren, also nicht:
+
+\noindent--------\\
+2	Ist-Zustand\\
+2.1	Ist-Zustand im Unternehmen XYZ\\
+3	Soll-Konzept\\
+--------
+
+Abkürzungen im Plural (Formatvorlagen) erhalten kein nachgestelltes "`s"'. Abkürzungen wie "`PCs"' oder "`CD-ROMs"' sind unzulässig.
+
+Sollen einzelne Wörter im Text hervorgehoben werden, so ist eine kursive Hervorhebung dem Druck in fetter Schrift  vorzuziehen.
+
+\subsection{Überschriften}
+
+Jeder Überschrift sollte auf der tiefsten Gliederungsebene mindestens eine Seite Text folgen, davon mindestens zwei Zeilen auf derselben Seite. Es sollten nicht mehr als vier Gliederungsebenen verwendet werden. 
+
+Überschriften sollten in eine Zeile passen, damit Silbentrennungen vermieden werden können. Sollten Silbentrennungen in Ausnahmefällen erforderlich sein, ist sinngemäß zu trennen, also z.B. nicht Umweltin-formatik, sondern Umwelt-informatik.
+
+\subsection{Abbildungen}
+
+Bei der Erstellung von Abbildungen ist darauf zu achten, dass die erzeugten Grafiken selbstähnlich seien müssen, d. h. Größe, Schriftart, Schattierung, Linienart und -stärke, sowie die Art der Pfeilspitzen müssen in allen Grafiken gleich gewählt werden. Die serifenlose Schriftart Arial sollte in jedem Fall benutzt werden. Dabei sollte jedoch beachtet werden, dass auf Schatten, 3D-Effekte  und Füllbereich zunächst zu verzichten ist. Sie dienen als Hervorhebung in einigen wenigen Grafiken; der Großteil der verwendeten Grafiken enthält diese Hervorhebungen nicht.
+
+Bei der Verwendung von perspektivischen Elementen wie Schatten oder 3D-Effekt ist zu beachten, dass die Perspektive in allen Zeichnungen gleich sein sollte (z. B. Parallelperspektive nach rechts unten).
+
+Erklärende Texte sind so weit wie möglich in Text einzugeben (z. B. die Quellenangabe).
+ 
+\subsection{Allgemeine Hinweise}
+\subsubsection{Querverweise}
+
+Wird in der Arbeit auf andere Stellen (Bilder, Kapitel, Tabellen ...) verwiesen, so ist jeder Verweis immer über Querverweise zu realisieren. In \LaTeX\  sollten dazu z.B. die Befehle $\backslash$ref und $\backslash$label verwendet werden.
+
+\subsubsection{Ausdrucke}
+
+Beste Ergebnisse werden erzielt, wenn das Dokument immer auf demselben Drucker in derselben Auslösung ausgedruckt wird. Bei einem Wechsel der Druckertreiber ergeben sich sonst neue Seiten- und Zeilenumbrüche; auch bei einem Wechsel von einem 300dpi auf einen 600dpi Ausdruck entstehen erhebliche Unterschiede im gesamten Dokument. Durch völlig andere Zeilenumbrüche werden Trennungsfehler nicht erkannt; auch das Auffinden von zu korrigierenden Textpassagen wird durch unterschiedliche Ausdrucke erheblich erschwert. Für den endgültigen Ausdruck sind durch diese Abhängigkeit von einem speziellen Druckermodell geeignete Maßnahmen zur Gewährleistung der Verfügbarkeit  der Hardware zu ergreifen.
+
+\subsubsection{Fußnoten}
+
+Fußnoten werden in \LaTeX mit dem Befehl $\backslash$footnote erstellt. Dabei beginnen die einfügten Fußnoten immer mit einem Großbuchstaben und enden mit einem Punkt\footnote{Vergleiche diese Fußnote.}. Fußnoten sind Anmerkungen des Autors vorbehalten, die nicht zwingend zum Verständnis des Haupttextes erforderlich sind (somit im stringenten Argumentationsfluss des Haupttextes stören würden), jedoch für den Leser wertvolle zusätzliche Hinweise enthalten. Es kann sich dabei um Zusatzinformationen (z.B. alternative Formulierungen, Spezifika zitierter Literatur, prägnante Zitate, die im Haupttext stören würden), Erklärungen (z.B. weitere Formelinterpretationen, die jedoch vom Hauptgedankengang ablenken würden) oder Querverweise (Abschnittsverweise in der vorliegenden Arbeit oder spezifische, nicht zitierte Zusatzliteratur) handeln.
+
+\subsubsection{Zitat}
+
+Das Zitieren verwendeter Literatur erfolgt somit nicht in den Fußnoten, sondern im Haupttext unter Verwendung von $\backslash$cite und BibTeX. Es werden direkte Zitate (d. h. Text wird wörtlich – in Anführungszeichen - übernommen; Quellennachweis ohne ‚vgl.‘) und indirekte Zitate (d. h. sinngemäße Wiedergabe des Textes; Quellennachweis mit ‚vgl.‘) unterschieden. Bei Zitaten mit einer Länge von zwei Seiten wird die erste Seite und "`f."' angegeben, bei mehr als zwei Seiten wird "`ff."' verwendet. \\
+
+z.B.: In-memory databases are playing a huge role in development of the next generation databases \citep{Dmitriyev:2014:BigDataUDF}. \\
+
+z.B.: On the other hand, knowledge sharing within the team, which deals with data mining and machine learning daily, is a curtail factor for a successful data analytics cycle \citep{Kruse:18:DataDrivenDecision}.
+
+%
+% Example of using acronyms (with package)
+%
+\subsubsection{Acronyms}
+% z.B. : \\
+Here is an example how acronym could be used in this template.
+
+Given a set of numbers, there are elementary methods to compute its \acrlong{gcd}, which is abbreviated \acrshort{gcd}. 
+
+Another topic and another reference: important concept in databases is \acrfull{acid}.
+
+\subsubsection{LaTeX-Werkzeuge}
+
+Arbeiten mit LaTeX:
+
+\begin{itemize}
+	\item \href{https://overleaf.com/}{Overleaf, Online-LaTeX-Editor}
+	\item \href{http://www.texstudio.org/}{TeXstudio}
+\end{itemize}
+
+Arbeiten mit BibTeX:
+
+\begin{itemize}
+	\item \href{http://www.jabref.org/}{JabRef} (verwaltung von \textit{*.bib} Datei)
+	\item \href{https://scholar.google.de/}{Google Scholar} (suche nach passendes BibTex Datei)
+\end{itemize}		
+
+Online Materialien:
+
+\begin{itemize}
+	\item \href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Learn LaTeX in 30 minutes}
+	\item \href{http://www.dnb.de/DE/Wir/Projekte/Archiv/dissonlineTutor.html}{Empfehlungen zur Erstellung digitaler Dissertationen mit LaTeX}
+	\item \href{http://www.latex-tutorial.com/tutorials/beginners/}{Tutorial for \textit{Beginners}}
+	\item \href{http://www.math.uiuc.edu/~hildebr/tex/latex-start.html}{Getting Started with LaTeX}
+	\item \href{http://wch.github.io/latexsheet/}{LaTeX cheat sheet}
+	\item \href{https://github.com/vdmitriyev/latex-intro}{Introductory course into LaTeX usage}
+\end{itemize}				
+
+\subsection{Weitere Hinweise}
+
+Auf dieser \href{https://www.uni-oldenburg.de/informatik/vlba/lehre/hinweise-und-vorlagen/}{Seite} finden Sie alle wichtigen Informationen für die Durchführung einer Bachelor- bzw. Masterarbeit (z.B. \href{https://www.uni-oldenburg.de/fileadmin/user_upload/informatik/ag/vlba/download/Praesentationstechnik.pdf}{Hinweise zur Präsentationstechnik}). Dazu gehören u. A. die Anfragevorbereitung sowie Formatvorlagen zur Anfertigung der wissenschaftlichen Arbeit.\\
+
+
+Eine typische Inhaltsverzeichnis für einer Bachelor- bzw. Masterarbeits Exposé:
+
+\begin{itemize}
+	\item Motivation
+	\item Problemstellung
+	\item Methodisches Vorgehen
+	\item Gliederung der Arbeit
+	\item Zeitplan
+	\item Literatur
+\end{itemize}
+
+\section{Weitere Abschnitte des Hauptteils}
+
+Der Hauptteil sollte in mehrere Abschnitte unterteilt werden; für die weiteren Abschnitte gelten dieselben Anforderungen, die bereits in Kapitel "`Erster Abschnitt des Hauptteils"' dargelegt wurden.
+
+\section{Schlussteil}
+
+Zum Schluss der Arbeit kann in dem letzten Teil eine thesenartige Zusammenfassung der Untersuchungsergebnisse gegeben werden. Andere Möglichkeiten sind hier auch der Ausblick auf weitere – noch ungelöste – Fragestellungen im Zusammenhang mit dem Thema.
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+Das Literaturverzeichnis ist Bestandteil jeder wissenschaftlichen Arbeit. Präzise und aussagekräftige Angaben erleichtern die Recherche für spätere Leser. Die Verwendung von Zitaten oder Ideen aus anderen Arbeiten oder aus sonstigen Quellen ohne deutlichen Hinweis auf deren Ursprung stellt eines der schwersten akademischen Vergehen dar. Eine wissenschaftliche Arbeit, in der dieser Fehler wiederholt gemacht wird, wird zu Recht als Plagiat bezeichnet. Um neue Quelle hinzuzufügen, sollten Sie die Datei \textbf{literature.bib} (BibTeX) verwenden und die Quelle im Text zitieren.
+
+\addcontentsline{toc}{section}{Literaturverzeichnis}
+%\addcontentsline{toc}{section}{References}
+\bibliographystyle{apacite}
+\bibliography{literature}
+\newpage
+
+%----------------------------------------------------------------------------------------
+% APPENDIX
+%----------------------------------------------------------------------------------------
+\begin{appendix}
+
+\section{Anhang}
+% \section{Appendix}
+Weitere Informationen werden im Anhang abgedruckt (z. B. Listings).
+
+\begin{lstlisting}[language=Python, caption=Python example]
+import pandas as pd
+
+def read_data(fname: str = 'data.csv'):
+    df = pd.read_csv(fname)
+    return df
+df = read_data()
+\end{lstlisting}
+
+	
+\end{appendix}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+% SIGNATURE 
+%----------------------------------------------------------------------------------------
+
+% Configure signature page
+\clearpairofpagestyles
+% \rofoot[\pagemark]{\pagemark}
+
+\section*{Abschließende Eigenständigkeitserklärung}
+
+\vspace*{0.5cm} 
+
+Hiermit versichere ich, dass ich diese Arbeit selbstständig verfasst habe und keine anderen als die angegebenen verwendet sowie keine unzulässige fremde Hilfe in Anspruch genommen habe. 
+Zudem wurde die Arbeit nicht unter unkenntlichem Einsatz generativer KI erbracht. 
+Außerdem versichere ich, dass ich die allgemeinen Prinzipien wissenschaftlicher Arbeit und Veröffentlichung, wie sie in den Leitlinien guter wissenschaftlicher Praxis der Carl von Ossietzky Universität Oldenburg festgelegt sind, befolgt habe.
+
+\vspace*{0.5cm} 
+
+\raggedright
+Weiterhin erkläre ich, dass die Arbeit in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegt wurde.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO Explanation:
+%     1. Change text after command "\textit" 
+%     2. Delete command "\textit" and "{}", but keep changes
+%     3. Do not forget to sign the document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vspace*{3cm} 
+\noindent Oldenburg, \textit{Datum} 
+\hspace*{6cm} \textit{Vorname, Name}
+\hspace*{8cm} \textit{handschriftliche Unterschrift}
+
+%----------------------------------------------------------------------------------------
+% CONTENT ENDS
+%----------------------------------------------------------------------------------------
+\end{document}
